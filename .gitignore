@@ -1,5 +1,12 @@
-.venv
-/dist
-/.idea
-**/.DS_Store
+# Byte-compiled / optimized / DLL files
 **/__pycache__
+
+# pyenv
+.python-version
+
+# Distribution / packaging
+/dist
+
+# Mac
+**/.DS_Store
+
