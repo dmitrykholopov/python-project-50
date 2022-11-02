@@ -26,3 +26,5 @@ lint:
 
 gendiff:
 	poetry run gendiff
+
+.PHONY: install test lint selfcheck check build
