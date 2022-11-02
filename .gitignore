@@ -10,3 +10,7 @@
 # Mac
 **/.DS_Store
 
+# Unit test / coverage reports
+.coverage
+coverage.xml
+.pytest_cache/
