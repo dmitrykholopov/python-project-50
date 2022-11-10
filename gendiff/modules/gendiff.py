@@ -27,7 +27,8 @@ def generate_diff(file1_path, file2_path):
             part = f'  + {key}: {get_ev(dict2[key])}\n'
             result += part
     result += '}'
+    print(result)
     return result
 
 
-print(generate_diff('gendiff/json_files/file1.json', 'gendiff/json_files/file2.json'))
+# print(generate_diff('gendiff/json_files/file1.json', 'gendiff/json_files/file2.json'))

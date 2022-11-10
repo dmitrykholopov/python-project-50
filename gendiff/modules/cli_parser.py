@@ -14,4 +14,5 @@ def get_cli_parametres():
                         help='set format of output',
                         dest='FORMAT'
                         )
-    parser.parse_args()
+    file_names = parser.parse_args()
+    return file_names.first_file, file_names.second_file
