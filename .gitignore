@@ -14,3 +14,6 @@
 .coverage
 coverage.xml
 .pytest_cache/
+
+# Test files
+*/json_files
