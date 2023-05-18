@@ -6,6 +6,8 @@ authors = ["Dmitry Kholopov <dkholopov@yandex.ru>"]
 readme = "README.md"
 packages = [
     {include = "gendiff"}
+    {include = "gendiff/modules/*.py"},
+    {include = "gendiff/scripts/*.py"}
 ]
 
 [tool.poetry.dependencies]
