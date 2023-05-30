@@ -9,5 +9,6 @@ def main():
     generate_diff(file1, file2)
 # TODO REMOVE this from HERE!!!
 
+
 if __name__ == '__main__':
     main()
