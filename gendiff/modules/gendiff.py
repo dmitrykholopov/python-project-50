@@ -25,21 +25,27 @@ def is_added(key: str, dict1: dict, dict2: dict) -> str:
     return f'  + {key}: {get_ev(dict2[key])}\n'
 
 
-def get_result_string(dict1: dict, dict2: dict, all_keys: set, result=None) -> str:
+def get_part_of_result(key: str, dict1: dict, dict2: dict) -> str:
+
+    if key in dict1 and key in dict2:
+        return is_updated_or_unchanged(key, dict1, dict2)
+
+    if key in dict1 and key not in dict2:
+        return is_removed(key, dict1, dict2)
+
+    if key in dict2 and key not in dict1:
+        return is_added(key, dict1, dict2)
+
+
+def get_result_string(
+        dict1: dict, dict2: dict, all_keys: set, result=None) -> str:
     result = result or []
     result.append('}\n')
-
-    for key in all_keys:
-
-        if key in dict1 and key in dict2:
-            result.append(is_updated_or_unchanged(key, dict1, dict2))
-
-        if key in dict1 and key not in dict2:
-            result.append(is_removed(key, dict1, dict2))
-
-        if key in dict2 and key not in dict1:
-            result.append(is_added(key, dict1, dict2))
-
+    structured_res = [
+        get_part_of_result(key, dict1, dict2)
+        for key in all_keys
+    ]
+    result.extend(structured_res)
     result.append('}')
 
     return ''.join(result)
