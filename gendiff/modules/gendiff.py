@@ -6,54 +6,43 @@ def get_ev(value: str) -> str:
 
 
 def is_updated_or_unchanged(key: str, dict1: dict, dict2: dict) -> str:
-    result = ''
-
     if key in dict1 and key in dict2:
-            if dict1[key] == dict2[key]:
-                part = f'    {key}: {get_ev(dict1[key])}\n'
-                result += part
-            else:
-                part = f'  - {key}: {get_ev(dict1[key])}\n'
-                result += part
-                part = f'  + {key}: {get_ev(dict2[key])}\n'
-                result += part
+        if dict1[key] == dict2[key]:
+            return f'    {key}: {get_ev(dict1[key])}\n'
 
-    return result
+        else:
+            part1 = f'  - {key}: {get_ev(dict1[key])}\n'
+            part2 = f'  + {key}: {get_ev(dict2[key])}\n'
+
+            return f'{part1}{part2}'
 
 
 def is_removed(key: str, dict1: dict, dict2: dict) -> str:
-    result = ''
-    part = f'  - {key}: {get_ev(dict1[key])}\n'
-    result += part
-
-    return result
+    return f'  - {key}: {get_ev(dict1[key])}\n'
 
 
 def is_added(key: str, dict1: dict, dict2: dict) -> str:
-    result = ''
-    part = f'  + {key}: {get_ev(dict2[key])}\n'
-    result += part
-
-    return result
+    return f'  + {key}: {get_ev(dict2[key])}\n'
 
 
-def get_result_string(dict1: dict, dict2: dict, united_keys: set) -> str:
-    result = '}\n'
+def get_result_string(dict1: dict, dict2: dict, all_keys: set, result=None) -> str:
+    result = result or []
+    result.append('}\n')
 
-    for key in united_keys:
+    for key in all_keys:
 
         if key in dict1 and key in dict2:
-            result += is_updated_or_unchanged(key, dict1, dict2)
+            result.append(is_updated_or_unchanged(key, dict1, dict2))
 
         if key in dict1 and key not in dict2:
-            result += is_removed(key, dict1, dict2)
+            result.append(is_removed(key, dict1, dict2))
 
         if key in dict2 and key not in dict1:
-            result += is_added(key, dict1, dict2)
+            result.append(is_added(key, dict1, dict2))
 
-    result += '}'
+    result.append('}')
 
-    return result
+    return ''.join(result)
 
 
 def generate_diff(file1_path: str, file2_path: str) -> str:
