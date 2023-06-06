@@ -5,10 +5,7 @@ description = "gendiff"
 authors = ["Dmitry Kholopov <dkholopov@yandex.ru>"]
 readme = "README.md"
 packages = [
-    {include = "gendiff"},
-    {include = "tests"},
-    {include = "gendiff/modules/*.py"},
-    {include = "gendiff/scripts/*.py"}
+    { include = "gendiff" }
 ]
 
 [tool.poetry.dependencies]
@@ -20,8 +17,7 @@ pytest-cov = "^4.0.0"
 flake8 = "^6.0.0"
 
 [tool.poetry.scripts]
-gendiff = "gendiff.scripts.gendiff:main"
-
+gendiff = "gendiff.scripts.gendif:main"
 
 [build-system]
 requires = ["poetry-core"]
