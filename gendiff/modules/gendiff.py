@@ -1,28 +1,32 @@
 import json
 
 
-def get_ev(value: str) -> str:
-    return json.JSONEncoder().encode(value)
+LITERALS = {False: 'false', True: 'true', None: 'none'}
+
+
+def get_json_value(value: str) -> str:
+    # return json.JSONEncoder().encode(value) # returns values with "" - we don't want this
+    return LITERALS[value].lower() if value in LITERALS.keys()else value
 
 
 def is_updated_or_unchanged(key: str, dict1: dict, dict2: dict) -> str:
     if key in dict1 and key in dict2:
         if dict1[key] == dict2[key]:
-            return f'    {key}: {get_ev(dict1[key])}\n'
+            return f'    {key}: {get_json_value(dict1[key])}\n'
 
         else:
-            part1 = f'  - {key}: {get_ev(dict1[key])}\n'
-            part2 = f'  + {key}: {get_ev(dict2[key])}\n'
+            part1 = f'  - {key}: {get_json_value(dict1[key])}\n'
+            part2 = f'  + {key}: {get_json_value(dict2[key])}\n'
 
             return f'{part1}{part2}'
 
 
 def is_removed(key: str, dict1: dict, dict2: dict) -> str:
-    return f'  - {key}: {get_ev(dict1[key])}\n'
+    return f'  - {key}: {get_json_value(dict1[key])}\n'
 
 
 def is_added(key: str, dict1: dict, dict2: dict) -> str:
-    return f'  + {key}: {get_ev(dict2[key])}\n'
+    return f'  + {key}: {get_json_value(dict2[key])}\n'
 
 
 def get_part_of_result(key: str, dict1: dict, dict2: dict) -> str:
@@ -40,7 +44,7 @@ def get_part_of_result(key: str, dict1: dict, dict2: dict) -> str:
 def get_result_string(
         dict1: dict, dict2: dict, all_keys: set, result=None) -> str:
     result = result or []
-    result.append('}\n')
+    result.append('{\n')
     structured_res = [
         get_part_of_result(key, dict1, dict2)
         for key in all_keys
@@ -54,6 +58,8 @@ def get_result_string(
 def generate_diff(file1_path: str, file2_path: str) -> str:
     dict1 = json.load(open(file1_path))
     dict2 = json.load(open(file2_path))
+    print(f'DICT1 = {dict1}')
+    print(f'DICT2 = {dict2}')
     united_keys = sorted(set(dict1.keys()) | set(dict2.keys()))
 
     return get_result_string(dict1, dict2, united_keys)
