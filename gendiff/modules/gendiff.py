@@ -5,7 +5,8 @@ LITERALS = {False: 'false', True: 'true', None: 'none'}
 
 
 def get_json_value(value: str) -> str:
-    # return json.JSONEncoder().encode(value) # returns values with "" - we don't want this
+    # return json.JSONEncoder().encode(value) # returns values with ""
+    # - we don't want this
     return LITERALS[value].lower() if value in LITERALS.keys()else value
 
 
