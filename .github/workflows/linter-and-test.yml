@@ -22,6 +22,10 @@ jobs:
         - name: Analysing the code with Python linters
           run: |
             make lint
-        - name: Run tests
-          run: |
-            make test-coverage
+            make test
+        - name: Test-coverage
+          uses: paambaati/codeclimate-action@v3.0.0
+          env:
+            CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          with:
+            coverageCommand: make test-coverage
