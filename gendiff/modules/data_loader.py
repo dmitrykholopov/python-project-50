@@ -1,5 +1,4 @@
-from json import load as json_load, dump as json_dump
-# from yaml import load as yaml_load, dump as yaml_dump
+from json import load as json_load
 
 from gendiff.modules.cli_parser import get_cli_parametres
 

@@ -5,15 +5,14 @@ KEY_STATES = {'ADDED': 'added',
               'NESTED': 'nested',
               'REMOVED': 'removed',
               'UNCHANGED': 'unchanged',
-              'UPDATED': 'updated'
-}
+              'UPDATED': 'updated'}
 
 
-def add_node(key: str | int | float| tuple | frozenset, 
+def add_node(key: str | int | float | tuple | frozenset,
              node_type: str,
-             value: Any=None, 
-             old_value: Any=None,
-             children: list=None) -> dict:
+             value: Any = None,
+             old_value: Any = None,
+             children: list = None) -> dict:
 
     node_pattern = {
         'key': key,
