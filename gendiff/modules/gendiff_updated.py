@@ -24,13 +24,13 @@ def add_node(key: str | int | float| tuple | frozenset,
         'node type': node_type
     }
 
-    if children is not None:
+    if children:
         node_pattern['children'] = children
 
     return node_pattern
 
 
-def get_ast_tree(data1: dict, data2: dict) -> dict:
+def get_ast_tree(data1: dict, data2: dict) -> list:
     united_keys = sorted(set(data1.keys()) | set(data2.keys()))
     ast_tree = []
 
